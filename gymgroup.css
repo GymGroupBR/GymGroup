@@ -1,0 +1,113 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+}
+
+a:link, a:visited{
+	text-decoration: none;
+	background-color: #4260AC;
+	color: white;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+}
+
+a:hover, a:active{
+	background-color: #BA54A0;
+	color: white;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+}
+
+label{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+	color: red;
+}
+
+h1{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	color: #4260AC;
+	}
+
+h5{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+}
+
+.selo {
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 10px;
+	color:#000000;
+}
+
+.rotulo {
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+	color:#4260AC;
+}
+
+.inputBotao{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+}
+
+.inputRedUC{
+	border-color: red;
+	background-color:lightpink;
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	text-transform: uppercase;	
+}
+
+.inputRed{
+	border-color: red;
+	background-color:lightpink;
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+}
+
+.inputWithe{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	text-transform: uppercase;	
+}
+
+.aviso{
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.subttl{
+	background-color: #BA54A0;
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-size: 12px;
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	text-transform: uppercase;
+	color: white
+}
