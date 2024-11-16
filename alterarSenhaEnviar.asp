@@ -12,7 +12,10 @@ Dim Senha02
 
 SET adoCnn = Server.CreateObject("ADODB.Connection")
 SET rsCadastro = Server.CreateObject("ADODB.RecordSet")
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb") 
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+'Então, o arquivo dbGG.accdb está no caminho home\gymgroup\banco\'
+
 adoCnn.Open(sCnn)
 
 Email = Request.Form("txtEmail")
@@ -41,7 +44,7 @@ END IF
 rsCadastro.Close
 SET rsCadastro = NOTHING
 adoCnn.Close
-SET adoCnn = Nothing
+SET adoCnn = NOTHING
 %>
 <!doctype html>
 
@@ -73,8 +76,8 @@ SET adoCnn = Nothing
 	</tr>
 	<tr align="center">
 		<td width="30%"></td>
-		<td width="20%"><a class="aviso" href="cadastro.asp" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Redefinir Senha ::..');return document.MM_returnValue">Sim</a></td>
-		<td width="20%"><a class="aviso" href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Redefinir Senha ::..');return document.MM_returnValue">Não</a></td>
+		<td width="20%"><a class="aviso" href="cadastro.asp">Sim</a></td>
+		<td width="20%"><a class="aviso" href="javascript:history.back()">Não</a></td>
 		<td width="30%"></td>
 	</tr>
 	<%ELSEIF Regra = 1 OR Regra = 02 THEN%>
@@ -82,19 +85,19 @@ SET adoCnn = Nothing
 		<td align="center"><p class="aviso"><%Response.Write(MSG)%></p></td>
 	</tr>
 	<tr align="center">
-		<td><a class="aviso" href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Redefinir Senha ::..');return document.MM_returnValue">Voltar</a></td>
+		<td><a class="aviso" href="javascript:history.back()">Voltar</a></td>
 	</tr>
 	<%ELSEIF Regra = 3 THEN%>
 	<tr>
 		<td align="center"><p class="aviso"><%Response.Write(MSG)%></p></td>
 	</tr>
 	<tr align="center">
-		<td><a class="aviso" href="../index.asp" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Redefinir Senha ::..');return document.MM_returnValue">Realizar Login</a></td>
+		<td><a class="aviso" href="../index.asp">Realizar Login</a></td>
 	</tr>
 	<%END IF%>
 </table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </form>
 </body>
 </html>

@@ -4,8 +4,6 @@ Dim adoCnn
 Dim rsCadastro
 Dim sCnn, sSQL
 
-Nome = Request.QueryString("Nome")
-Senha = Request.QueryString("Senha")
 Tipo = Request.QueryString("Tipo")
 Email = Request.QueryString("Email")
 Bairro = Request.Form("txtBairro")
@@ -14,8 +12,14 @@ Uf = Request.Form("cboUf")
 
 Set adoCnn = Server.CreateObject("ADODB.Connection")
 Set rsCadastro = Server.CreateObject("ADODB.RecordSet")
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
 adoCnn.Open(sCnn)
+
+sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"
+rsCadastro.Open sSQL, adoCnn, 1, 1
+Nome = rsCadastro("cadastroNome")
+rsCadastro.Close
 
 IF Tipo = "PROFISSIONAL" THEN
 	IF Uf = EMPTY AND Cidade = EMPTY AND Bairro = EMPTY THEN
@@ -56,24 +60,26 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 </head>
 	
 <body leftmargin="5" topmargin="5">
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
+<table width="800" align="center">
   <tr>
-		<td align="center"><img src="../imgs/logo.png" width="235" height="179" alt=""/></td>
-	</tr>
-	</table>
+		<td width="560"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
+	  <td width="120" align="right"><a href="cadastroIndividual.asp?sEmail=<%=Email%>">MEU CADASTRO</a></td>
+	  <td width="70" align="right"><a href="javascript:history.back()">VOLTAR</a></td>
+	  <td width="50" align="right"><a href="../index.asp">SAIR</a></td>
+  </tr>
+</table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr height="20">
-    <td width="90%" bgcolor="#4260AC"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FFCC00"><b>&nbsp;Usuário: <font color="#FFFFFF"><%=Response.Write(Nome)%> (<%=Response.Write(Tipo)%>)</font></b></font></td>
-	<td width="10%" bgcolor="#4260AC" align="right"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><a href="../index.asp" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Sair ::..');return document.MM_returnValue">SAIR</a>&nbsp;</b></font></td>
+  <tr height="20" class="subttl">
+	<td width="75%">Usuário:&nbsp;<span class="selo"><%=Response.Write(Nome)%></span></td>
+	<td width="25%" align="right">Tipo:&nbsp;<span class="selo"><%=Response.Write(Tipo)%></span></td>
   </tr>
 </table>
 <br>
 <%IF rsCadastro.RecordCount = 0 THEN%>
 <div align="center"><p class="aviso">Não Existem Cadastros com estes Parâmetros!<br>
 Realize uma Nova Pesquisa!<br>
-<br>
-<a class="aviso" href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Pesquisa ::..');return document.MM_returnValue">Voltar</a></p></div>
+<br></p></div>
   <%rsCadastro.Close%>
   <%SET rsCadastro = Nothing%>
   <%adoCnn.Close%>
@@ -101,14 +107,8 @@ Realize uma Nova Pesquisa!<br>
   <%adoCnn.Close%>
   <%SET adoCnn = Nothing%>
 </table>
-<br>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td class="aviso" align="center"><a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Pesquisar ::..');return document.MM_returnValue">Voltar</a></td>
-  </tr>
-</table>
 <%END IF%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>

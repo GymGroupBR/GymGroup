@@ -1,4 +1,5 @@
 <%@LANGUAGE="VBSCRIPT"%>
+
 <!doctype html>
 
 <html lang="pt-br">
@@ -20,7 +21,11 @@
   </tr>
 </table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div align="center"><label>ATEN&Ccedil;&Atilde;O: Os campos em Vermelho s&atilde;o de Preencimento Obrigat&oacute;rio</label></div>
+<div align="center">
+  <label>ATEN&Ccedil;&Atilde;O<br>
+Os campos em Vermelho s&atilde;o de Preencimento Obrigat&oacute;rio<br>
+Não Utilizar Acentuações no Cadastro</label>
+</div>
 	<br>
 <form name="frmCadastro" method="Post" action="cadastroEnviar.asp">
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
@@ -61,27 +66,29 @@
   </tr>
     <tr>
     <td><p class="rotulo">Data Nascimento</p></td>
-    <td><input class="inputRedUC" type="date" name="txtNascimento" id="txtNascimento"></td>
+    <td><input class="inputRedUC" type="date" name="txtNascimento" id="txtNascimento"> </td>
   </tr>
   <tr>
     <td><p class="rotulo">Possui Defici&ecirc;ncia</p></td>
     <td><select class="inputWithe" name="cboDeficiencia" id="cboDeficiencia">
-      <option>Não</option>
-      <option>Auditiva - Parcial</option>
-      <option>Auditiva - Total</option>
-      <option>Física - Membros Inferiores</option>
-      <option>Física - Membros Superiores</option>
-      <option>Física - Motora</option>
-      <option>Múltipla</option>
-      <option>Visão - Parcial</option>
-      <option>Visão - Total</option>
-      <option>Reabilitado</option>
-		</select></td>
+      		<option>Nao</option>
+			<option>Auditiva - Parcial</option>
+      		<option>Auditiva - Total</option>
+      		<option>Fisica - Membros Inferiores</option>
+      		<option>Fisica - Membros Superiores</option>
+      		<option>Fisica - Motora</option>
+      		<option>Multipla</option>
+      		<option>Visao - Parcial</option>
+      		<option>Visao - Total</option>
+      		<option>Reabilitado</option>
+			<option>Outro</option>
+		</select>
+	</td>
   </tr>
   <tr>
     <td><p class="rotulo">Telefone Celular</p></td>
     <td><input class="inputWithe" name="txtCelular" type="text" id="txtCelular" size="14" maxlength="14">
-		<span class="selo">&nbsp;exemplo: (19)9-1234-5678</span></td>
+		<span class="selo">&nbsp;somente números (DDD e número do celular)</span></td>
   </tr>
   <tr>
     <td><p class="rotulo">Endere&ccedil;o</p></td>
@@ -148,6 +155,6 @@
 </div>
 </form>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>

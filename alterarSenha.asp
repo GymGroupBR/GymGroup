@@ -29,23 +29,27 @@
     <td width="700"><input class="inputRed" name="txtEmail" type="text" id="txtEmail" size="70" maxlength="70"></td>
   </tr>
   <tr>
-    <td><p class="rotulo">Senha</p></td>
+    <td><p class="rotulo">Nova Senha</p></td>
     <td><input class="inputRed" name="txtSenha01" type="password" id="txtSenha01" size="15" maxlength="8">
       <span class="selo"> 8 d&iacute;gitos alfa-num&eacute;ricos</span></td>
   </tr>
 	<tr>
-    <td><p class="rotulo">Repita Senha</p></td>
+    <td><p class="rotulo">Repita a Senha</p></td>
     <td><input class="inputRed" name="txtSenha02" type="password" id="txtSenha02" size="15" maxlength="8">
       <span class="selo"> 8 d&iacute;gitos alfa-num&eacute;ricos</span></td>
   </tr>
 </table>
-<p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
+<br>
 <div align="center">
   <input name="cmdEnviar" type="submit" id="cmdEnviar" value="Enviar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input name="cmdLimpar" type="reset" id="cmdLimpar" value="Limpar">
 </div>
 </form>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div align="center"><a href="../index.asp">Sair</a></div>
+  </tr>
+</table>
+<p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>

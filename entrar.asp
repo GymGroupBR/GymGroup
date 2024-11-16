@@ -19,7 +19,8 @@ Senha = Request.Form("txtSenha")
    
 Set adoCnn = Server.CreateObject("ADODB.Connection")
 Set rsCadastro = Server.CreateObject("ADODB.RecordSet")
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
 adoCnn.Open(sCnn)
 
 IF Email = EMPTY AND Senha = EMPTY THEN
@@ -66,16 +67,24 @@ END IF
 
 <body>
 <table width="800" align="center">
-	<tr>
-		<td align="center"><img src="../imgs/logo.png" width="235" height="179" alt=""></td>
-	</tr>
+  <tr>
+	<td width="630"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
+	  <%IF Tipo = "INDIVIDUAL" THEN%>
+	  <td width="120" align="right"><a href="cadastroIndividual.asp?sEmail=<%=Email%>">MEU CADASTRO</a></td>
+	<td width="50" align="right"><a href="../index.asp">SAIR</a></td>
+	  <%ELSEIF Tipo = "PROFISSIONAL" THEN%>
+	  <td width="120" align="right"><a href="cadastroProfissional.asp?sEmail=<%=Email%>">MEU CADASTRO</a></td>
+	<td width="50" align="right"><a href="../index.asp">SAIR</a></td>
+	  <%END IF%>
+	  
+  </tr>
 </table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <%IF Regra = 0 OR Regra = 1THEN%>
 <table width="800" align="center">
 	<tr>
 		<td align="center"><p><%Response.Write(MSG)%></p><br>
-			<a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP ::..');return document.MM_returnValue">Voltar</a>
+			<a href="javascript:history.back()">Voltar</a>
 		</td>
 	</tr>
 </table>
@@ -83,22 +92,22 @@ END IF
 <table width="800" align="center">
 	<tr>
 		<td align="center"><p><%Response.Write(MSG)%></p><br>
-			<a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP ::..');return document.MM_returnValue">Voltar</a>
+			<a href="javascript:history.back()">Voltar</a>
 		</td>
 	</tr>
 </table>
 <%ELSEIF Regra = 3 THEN%>
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr height="20">
-    <td width="90%" bgcolor="#4260AC"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FFCC00"><b>&nbsp;Usuário: <font color="#FFFFFF"><%=Response.Write(Nome)%> (<%=Response.Write(Tipo)%>)</font></b></font></td>
-	<td width="10%" bgcolor="#4260AC" align="right"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><a href="../index.asp" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Sair ::..');return document.MM_returnValue">SAIR</a>&nbsp;</b></font></td>
+  <tr height="20" class="subttl">
+	<td width="75%">Usuário:&nbsp;<span class="selo"><%=Response.Write(Nome)%></span></td>
+	<td width="25%" align="right">Tipo:&nbsp;<span class="selo"><%=Response.Write(Tipo)%></span></td>
   </tr>
 </table>
 <br>
-<form name="frmPesquisar" method="Post" action="pesquisar.asp?Nome=<%=Nome%>&Senha=<%=Senha%>&Tipo=<%=Tipo%>&Email=<%=Email%>">
+<form name="frmPesquisar" method="Post" action="pesquisar.asp?Tipo=<%=Tipo%>&Email=<%=Email%>">
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td class="subttl" align="center">REALIZAR PESQUISA</td>
+    <td class="subttl" align="center">FILTRE SUA PESQUISA</td>
   </tr>
 </table>
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
@@ -156,6 +165,6 @@ END IF
 </form>
 <%END IF%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>

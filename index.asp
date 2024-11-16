@@ -29,14 +29,17 @@
 			  <td width="20%" height="50" valign="middle"><label for="password">Senha:</label></td>
               <td valign="middle"><input type="password" name="txtSenha" id="txtSenha" size="20"></td>
    		  </tr>
+		  <tr>
+			  <td colspan="2"><hr></td>
+   		  </tr>
 	  </table>
-		<p align="center"><img src="imgs/linha.png" width="350" height="15"></p>
-	  <table width="350" height="50" align="center">
+		
+		<table width="350" height="50" align="center">
 			<tr>
 				<td align="center" valign="middle" width="50%"><label><input type="submit" value="Entrar"></label></td>
 				<td align="center" valign="middle" width="50%"><label><input type="reset" value="Limpar"></label></td>
-			</tr>
-  		</table>
+		  </tr>
+	  </table>
 	</form>
 	<p align="center"><img src="imgs/linha.png" width="350" height="15"></p>
 	<table width="350" align="center">
@@ -47,5 +50,7 @@
 		        <a href="pgns/alterarSenha.asp">Clique Aqui</a></td>
       		</tr>
 	</table>
+<p align="center"><img src="imgs/linha.png" width="350" height="15"></p>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>

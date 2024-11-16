@@ -4,10 +4,12 @@ Dim sCnn
 Dim adoCnn
 Dim sSQL
 Dim rsCadastro
+Dim iRegra
 
 SET adoCnn = Server.CreateObject("ADODB.Connection")
 SET rsCadastro = Server.CreateObject("ADODB.RecordSet")
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb") 
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
 adoCnn.Open(sCnn)
 
 Tipo = Ucase(Request.Form("cboTipo"))
@@ -29,6 +31,7 @@ Uf = Ucase(Request.Form("cboUf"))
 Cidade = Ucase(Request.Form("txtCidade"))
 Cep = Request.Form("txtCep")
 %>
+	
 <!doctype html>
 
 <html lang="pt-br">
@@ -51,28 +54,28 @@ Cep = Request.Form("txtCep")
   </tr>
 </table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
+
 <%IF Len(Senha) < 8 THEN%>
 <div class="aviso" align="center">A Senha deve conter 8 digitos!<br>
 <br>
-<a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Cadastro ::..');return document.MM_returnValue">Clique Aqui, Reveja seu Cadastro</a></div>
-<%ELSE
-IF Senha = Empty OR Nome = Empty OR Nascimento = Empty OR Email = Empty OR Cidade = Empty OR Cep = Empty OR Bairro = Empty THEN%>
+<a href="javascript:history.back()">Clique Aqui, Reveja seu Cadastro</a></div>
+<%ELSEIF Senha = Empty OR Nome = Empty OR Nascimento = Empty OR Email = Empty OR Cidade = Empty OR Cep = Empty OR Bairro = Empty THEN%>
 <div class="aviso" align="center">Verifique os campos vermelhos!<br>
   Eles s&atilde;o de preenchimento obrigat&oacute;rio! <br>
 <br>
-<a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Cadastro ::..');return document.MM_returnValue">Clique Aqui, Reveja seu Cadastro</a></div>
+<a href="javascript:history.back()">Clique Aqui, Reveja seu Cadastro</a></div>
 <%ELSE%>
 <%sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"%>
 <%rsCadastro.Open sSQL, adoCnn, 1, 1%>
-<%IF rsCadastro.RecordCount >= 1 THEN%>
+<%IF rsCadastro.RecordCount = 1 THEN%>
 <div align="center" class="aviso">Apenas é permitido um cadastro por e-Mail.<br>
 Este e-Mail já consta em nosso sistema.<br>
 <br>
-<a href="javascript:history.back()" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Cadastro ::..');return document.MM_returnValue">Clique Aqui, Reveja seu Cadastro</a>
+<a href="../index.asp">Clique Aqui, Realize o Login</a>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 Esqueceu sua Senha?<br>
 <br>
-<a href="alterarSenha.asp" onMouseOver="MM_displayStatusMsg('..:: GYM GROUP :: Cadastro ::..');return document.MM_returnValue">Clique Aqui, Redefina sua Senha</a></div>
+<a href="alterarSenha.asp">Clique Aqui, Redefina sua Senha</a></div>
 <%rsCadastro.Close%>
 <%SET rsCadastro = NOTHING%>
 <%ELSE%>
@@ -102,38 +105,37 @@ adoCnn.Close
 SET adoCnn = Nothing
 %>
 <p align="center">
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="2"><b><%Response.Write(Nome)%></b>,<br>
-Seja Bem-Vindo a GYM GROUP!<br>
+<font class="rotulo"><%Response.Write(Nome)%></font>,<br>
+<font class="selo">Seja Bem-Vindo a GYM GROUP!<br>
 <br>
 Seu cadastro já está disponível em nosso banco de dados.<br>
 Confira seus dados abaixo, para eventuais altera&ccedil;&otilde;es, basta entrar com seu usuário (que é seu e-Mail) e sua senha.<br>
 <br>
 Equipe GYM GROUP</font><br>
 <br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="2" color="#4260AC"><b>Usuário e Senha</b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Tipo:&nbsp;<b><%Response.Write(Tipo)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">e-Mail:&nbsp;<b><%Response.Write(Email)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Senha:&nbsp;<b><%Response.Write(Senha)%></b></font><br>
+<font class="rotulo"><b>Usuário e Senha</b></font><br>
+<font class="selo">Tipo:&nbsp;<b><%Response.Write(Tipo)%></b></font><br>
+<font class="selo">e-Mail:&nbsp;<b><%Response.Write(Email)%></b></font><br>
+<font class="selo">Senha:&nbsp;<b><%Response.Write(Senha)%></b></font><br>
 <br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="2" color="#4260AC"><b>Informações Pessoais</b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Nome:&nbsp;<b><%Response.Write(Nome)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Data Nascimento:&nbsp;<b><%Response.Write(Nascimento)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Possui Deficiência:&nbsp;<b><%Response.Write(Deficiencia)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Telefone Celular:&nbsp;<b><%Response.Write(Celular)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Endereço:&nbsp;<b><%Response.Write(Endereco)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Nº:&nbsp;<b><%Response.Write(No)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Complemento:&nbsp;<b><%Response.Write(Complemento)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Bairro:&nbsp;<b><%Response.Write(Bairro)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Estado:&nbsp;<b><%Response.Write(Uf)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1">Cidade:&nbsp;<b><%Response.Write(Cidade)%></b></font><br>
-<font face="Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, 'sans-serif'" size="1" color="#FFFFFF">CEP:&nbsp;<b><%Response.Write(Cep)%></b></font><br>
+<font class="rotulo"><b>Informações Pessoais</b></font><br>
+<font class="selo">Nome:&nbsp;<b><%Response.Write(Nome)%></b></font><br>
+<font class="selo">Data Nascimento:&nbsp;<b><%Response.Write(Nascimento)%></b></font><br>
+<font class="selo">Possui Deficiência:&nbsp;<b><%Response.Write(Deficiencia)%></b></font><br>
+<font class="selo">Telefone Celular:&nbsp;<b><%Response.Write(Celular)%></b></font><br>
+<font class="selo">Endereço:&nbsp;<b><%Response.Write(Endereco)%></b></font><br>
+<font class="selo">Nº:&nbsp;<b><%Response.Write(No)%></b></font><br>
+<font class="selo">Complemento:&nbsp;<b><%Response.Write(Complemento)%></b></font><br>
+<font class="selo">Bairro:&nbsp;<b><%Response.Write(Bairro)%></b></font><br>
+<font class="selo">Estado:&nbsp;<b><%Response.Write(Uf)%></b></font><br>
+<font class="selo">Cidade:&nbsp;<b><%Response.Write(Cidade)%></b></font><br>
+<font class="selo">CEP:&nbsp;<b><%Response.Write(Cep)%></b></font><br>
 <br>
 <a href="../index.asp">Realizar Login</a>
 	</p>
 <%END IF%>
 <%END IF%>
-<%END IF%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div class="aviso" align="center">Todos os Direitos Reservados <%Response.Write("2024" & "-" & Year(Now))%> © GYM GROUP</div>
+<div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>
 </html>
