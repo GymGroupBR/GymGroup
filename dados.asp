@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim adoCnn
 Dim rsCadastro
@@ -36,14 +36,14 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Pesquisar</title>
+	<title>GYM GROUP :: Cadastro :: Detalhes</title>
 </head>
 	
 <body leftmargin="5" topmargin="5">
 <table width="800" align="center">
   <tr>
-		<td width="560"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
-	  <td width="120" align="right"><a href="cadastroIndividual.asp?sEmail=<%=Email%>">MEU CADASTRO</a></td>
+		<td width="230"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
+	  <td width="450" align="CENTER"><h1>DETALHES</h1></td>
 	  <td width="70" align="right"><a href="javascript:history.back()">VOLTAR</a></td>
 	  <td width="50" align="right"><a href="../index.asp">SAIR</a></td>
   </tr>
@@ -70,7 +70,9 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 	<td class="aviso" width="90%"><p><%=Response.Write(rsCadastro("cadastroEmail"))%></p></td>
   </tr>
 </table>
-<%rsCadastro.Close%>
+<%
+rsCadastro.Close
+%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
   	<%
 	IF Tipo = "INDIVIDUAL" OR Tipo = "GRUPO" THEN
@@ -94,6 +96,47 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 			<tr>
 			<td class="aviso">&nbsp;<%=Response.Write(rsCadastro("profissionalEspecialidades"))%></td>
   			</tr>
+			</table>
+			<br>
+			<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
+  			<tr>
+    		<td class="subttl">&nbsp;ÁREA DE ATUAÇÃO DO PROFISSIONAL</td>
+			</tr>
+			<% IF rsCadastro("profissionalCondominios") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;CONDOMÍNIOS / GRUPOS</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalAcademias") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;ACADEMIAS / CENTROS ESPORTIVOS</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalResidencias") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;RESIDÊNCIAS / PARTICULAR</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalEmpresas") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;EMPRESAS / INSTITUIÇÕES</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalEscolas") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;ESCOLAS / COLÉGIOS / UNIVERSIDADES</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalHospitais") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;HOSPITAIS / CLÍNICAS MÉDICAS</td>
+  			</tr>
+			<% END IF %>
+			<% IF rsCadastro("profissionalParques") = 1 THEN %>
+			<tr>
+			<td class="aviso">&nbsp;PARQUES / AR LIVRE / LOCAIS PÚBLICOS</td>
+  			</tr>
+			<% END IF %>
 			</table>
 		<%END IF%>
 		<%rsCadastro.Close%>

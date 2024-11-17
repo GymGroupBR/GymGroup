@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim sCnn
 Dim adoCnn
@@ -43,7 +43,7 @@ Cep = Request.Form("txtCep")
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Redefinir Senha</title>
+	<title>GYM GROUP :: Cadastro</title>
 </head>
 
 <body>
@@ -97,9 +97,36 @@ rsCadastro("cadastroBairro") = Bairro
 rsCadastro("cadastroUf") = Uf
 rsCadastro("cadastroCidade") = Cidade
 rsCadastro("cadastroCep") = Cep
-
 rsCadastro.Update
 rsCadastro.Close
+
+IF Tipo = "INDIVIDUAL" THEN
+	sSQL = "SELECT * FROM Individual"
+   	rsCadastro.Open sSQL, adoCnn, 1, 3
+   	rsCadastro.AddNew
+   	rsCadastro("individualEmail") = Email
+   	rsCadastro("individualAltura") = CDbl(0)
+   	rsCadastro("individualPeso") = CDbl(0)
+   	rsCadastro.Update
+   	rsCadastro.Close
+ELSEIF Tipo = "PROFISSIONAL" THEN
+	sSQL = "SELECT * FROM Profissional"
+   	rsCadastro.Open sSQL, adoCnn, 1, 3
+   	rsCadastro.AddNew
+   	rsCadastro("profissionalEmail") = Email
+   	rsCadastro("profissionalCref") = "NAO"
+    rsCadastro("profissionalCrefNo") = "-"
+   	rsCadastro("profissionalEspecialidades") = "-"
+   	rsCadastro("profissionalCondominios") = 0
+   	rsCadastro("profissionalResidencias") = 0
+   	rsCadastro("profissionalAcademias") = 0
+   	rsCadastro("profissionalEmpresas") = 0
+   	rsCadastro("profissionalEscolas") = 0
+   	rsCadastro("profissionalHospitais") = 0
+   	rsCadastro("profissionalParques") = 0
+    rsCadastro.Update
+   	rsCadastro.Close
+END IF
 SET rsCadastro = Nothing
 adoCnn.Close
 SET adoCnn = Nothing

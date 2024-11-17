@@ -12,10 +12,8 @@ Dim Senha02
 
 SET adoCnn = Server.CreateObject("ADODB.Connection")
 SET rsCadastro = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
-'Então, o arquivo dbGG.accdb está no caminho home\gymgroup\banco\'
-
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"--'
 adoCnn.Open(sCnn)
 
 Email = Request.Form("txtEmail")
@@ -57,7 +55,7 @@ SET adoCnn = NOTHING
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Cadastro</title>
+	<title>GYM GROUP :: Redefinir Senha</title>
 </head>
 
 <body>

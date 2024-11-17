@@ -1,11 +1,9 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim sCnn
 Dim adoCnn
 Dim sSQL
-Dim sSQLII
 Dim rsCadastro
-Dim rsProfissional
 Dim Email
 Dim sCdstr
 Dim Nome, Deficiencia, Nascimento, Celular, Endereco, No, Complemento, Bairro, Estado, Cidade, Cep
@@ -16,9 +14,8 @@ Email = Request.QueryString("sEmail")
 
 SET adoCnn = Server.CreateObject("ADODB.Connection")
 SET rsCadastro = Server.CreateObject("ADODB.RecordSet")
-SET rsProfissional  = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb--'
 adoCnn.Open(sCnn)
 
 Nome = Ucase(Request.Form("txtNome"))
@@ -64,125 +61,57 @@ rsCadastro("cadastroCidade") = Cidade
 rsCadastro("cadastroCep") = Cep
 rsCadastro.Update
 rsCadastro.Close
-SET rsCadastro = NOTHING
 
-sSQLII = "SELECT * FROM Profissional WHERE ProfissionalEmail='" & Email & "'"
-rsProfissional.Open sSQLII, adoCnn, 1, 1
-IF rsProfissional.RecordCount = 0 THEN
-   sCdstr = 0
-   rsProfissional.Close
-ELSE
-   sCdstr = 1
-   rsProfissional.Close
-END IF
-
-IF sCdstr = 0 THEN
-	sSQLII = "SELECT * FROM Profissional"
-   	rsProfissional.Open sSQLII, adoCnn, 1, 3
-   	rsProfissional.AddNew
-   	rsProfissional("profissionalEmail") = Email
-   	rsProfissional("profissionalCref") = Cref
+	sSQL = "SELECT * FROM Profissional WHERE profissionalEmail='" & Email & "'"
+	rsCadastro.Open sSQL, adoCnn, 1, 3
+	rsCadastro("profissionalCref") = Cref
    	IF Cref = "SIM" THEN
-   		rsProfissional("profissionalCrefNo") = CrefNo
+   		rsCadastro("profissionalCrefNo") = CrefNo
    	ELSE
-   		rsProfissional("profissionalCrefNo") = "-"
+   		rsCadastro("profissionalCrefNo") = "-"
    	END IF
    	IF Especialidades = EMPTY THEN
-   		rsProfissional("profissionalEspecialidades") = "-"
+   		rsCadastro("profissionalEspecialidades") = "-"
    	ELSE
-   		rsProfissional("profissionalEspecialidades") = Especialidades
+   		rsCadastro("profissionalEspecialidades") = Especialidades
    	END IF
    	IF Condominios = "on" THEN
-   		rsProfissional("profissionalCondominios") = 1
+   		rsCadastro("profissionalCondominios") = 1
    	ELSE
-   		rsProfissional("profissionalCondominios") = 0
+   		rsCadastro("profissionalCondominios") = 0
    	END IF
    	IF Academias = "on" THEN
-   		rsProfissional("profissionalAcademias") = 1
+   		rsCadastro("profissionalAcademias") = 1
    	ELSE
-   		rsProfissional("profissionalAcademias") = 0
+   		rsCadastro("profissionalAcademias") = 0
    	END IF
    	IF Residencias = "on" THEN
-   		rsProfissional("profissionalResidencias") = 1
+   		rsCadastro("profissionalResidencias") = 1
    	ELSE
-   		rsProfissional("profissionalResidencias") = 0
+   		rsCadastro("profissionalResidencias") = 0
    	END IF
    	IF Empresas = "on" THEN
-   		rsProfissional("profissionalEmpresas") = 1
+   		rsCadastro("profissionalEmpresas") = 1
    	ELSE
-   		rsProfissional("profissionalEmpresas") = 0
+   		rsCadastro("profissionalEmpresas") = 0
    	END IF
    	IF Escolas = "on" THEN
-   		rsProfissional("profissionalEscolas") = 1
+   		rsCadastro("profissionalEscolas") = 1
    	ELSE
-   		rsProfissional("profissionalEscolas") = 0
+   		rsCadastro("profissionalEscolas") = 0
    	END IF
    	IF Hospitais = "on" THEN
-   		rsProfissional("profissionalHospitais") = 1
+   		rsCadastro("profissionalHospitais") = 1
    	ELSE
-   		rsProfissional("profissionalHospitais") = 0
+   		rsCadastro("profissionalHospitais") = 0
    	END IF
    	IF Parques = "on" THEN
-   		rsProfissional("profissionalParques") = 1
+   		rsCadastro("profissionalParques") = 1
    	ELSE
-   		rsProfissional("profissionalParques") = 0
+   		rsCadastro("profissionalParques") = 0
    	END IF
-   	rsProfissional.Update
-   	rsProfissional.Close
-   	SET rsProfissional = NOTHING
-ELSE
-	sSQLII = "SELECT * FROM Profissional WHERE profissionalEmail='" & Email & "'"
-	rsProfissional.Open sSQLII, adoCnn, 1, 3
-	rsProfissional("profissionalCref") = Cref
-   	IF Cref = "SIM" THEN
-   		rsProfissional("profissionalCrefNo") = CrefNo
-   	ELSE
-   		rsProfissional("profissionalCrefNo") = "-"
-   	END IF
-   	IF Especialidades = EMPTY THEN
-   		rsProfissional("profissionalEspecialidades") = "-"
-   	ELSE
-   		rsProfissional("profissionalEspecialidades") = Especialidades
-   	END IF
-   	IF Condominios = "on" THEN
-   		rsProfissional("profissionalCondominios") = 1
-   	ELSE
-   		rsProfissional("profissionalCondominios") = 0
-   	END IF
-   	IF Academias = "on" THEN
-   		rsProfissional("profissionalAcademias") = 1
-   	ELSE
-   		rsProfissional("profissionalAcademias") = 0
-   	END IF
-   	IF Residencias = "on" THEN
-   		rsProfissional("profissionalResidencias") = 1
-   	ELSE
-   		rsProfissional("profissionalResidencias") = 0
-   	END IF
-   	IF Empresas = "on" THEN
-   		rsProfissional("profissionalEmpresas") = 1
-   	ELSE
-   		rsProfissional("profissionalEmpresas") = 0
-   	END IF
-   	IF Escolas = "on" THEN
-   		rsProfissional("profissionalEscolas") = 1
-   	ELSE
-   		rsProfissional("profissionalEscolas") = 0
-   	END IF
-   	IF Hospitais = "on" THEN
-   		rsProfissional("profissionalHospitais") = 1
-   	ELSE
-   		rsProfissional("profissionalHospitais") = 0
-   	END IF
-   	IF Parques = "on" THEN
-   		rsProfissional("profissionalParques") = 1
-   	ELSE
-   		rsProfissional("profissionalParques") = 0
-   	END IF
-   	rsProfissional.Update
-   	rsProfissional.Close
-   	SET rsProfissional = NOTHING
-END IF
+   	rsCadastro.Update
+   	rsCadastro.Close
 %>
 <!doctype html>
 
@@ -195,7 +124,7 @@ END IF
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Redefinir Senha</title>
+	<title>GYM GROUP :: Cadastro :: Detalhes</title>
 </head>
 
 <body>
@@ -255,5 +184,10 @@ END IF
 </p>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
+<%
+SET rsCadastro = NOTHING
+adoCnn.Close
+SET adoCnn = NOTHING
+%>
 </body>
 </html>

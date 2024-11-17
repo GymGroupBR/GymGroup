@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim adoCnn
 Dim rsCadastro
@@ -8,13 +8,12 @@ Email = Request.QueryString("sEmail")
 
 Set adoCnn = Server.CreateObject("ADODB.Connection")
 Set rsCadastro = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"--'
 adoCnn.Open(sCnn)
 
 sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"
 rsCadastro.Open sSQL, adoCnn, 1, 1
-
 %>
 
 <!doctype html>
@@ -48,8 +47,8 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 </table>
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="110"><p class="rotulo">Nome Completo</p></td>
-    <td width="690"><input class="inputWhite" name="txtNome" type="text" id="txtNome" size="100" maxlength="100" value="<%=rsCadastro("cadastroNome")%>"></td>
+    <td width="130"><p class="rotulo">Nome Completo</p></td>
+    <td width="670"><input class="inputWhite" name="txtNome" type="text" id="txtNome" size="100" maxlength="100" value="<%=rsCadastro("cadastroNome")%>"></td>
   </tr>
     <tr>
     <td><p class="rotulo">Data Nascimento</p></td>
@@ -143,64 +142,7 @@ rsCadastro.Close
 <%
 sSQL = "SELECT * FROM Profissional WHERE profissionalEmail='" & Email & "'"
 rsCadastro.Open sSQL, adoCnn, 1, 1
-IF rsCadastro.RecordCount = 0 THEN
 %>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  	<tr>
-		<td width="100"><p class="rotulo">Possui CREF?</p></td>
-		<td><select class="inputRedUC" name="cboCREF" id="cboCREF">
-        <option selected>SIM</option>
-        <option>NAO</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-    <td width="100"><p class="rotulo">Nº CREF</p></td>
-    <td width="700"><input class="inputWhite" name="txtCREF" type="text" id="txtCREF" size="20" maxlength="20">
-    <span class="selo"> caso informou que NÃO possui CREF, deixar este campo em branco</span></td>
-  </tr>
-</table>
-<br>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td class="subttl">&nbsp;DESCREVA SUAS ESPECIALIDADES, SEPARANDO-AS POR PONTO-E-VÍRGULA ::: NÃO UTILIZE ACENTUAÇÕES NAS PALAVRAS :::</td>
-  </tr>
-</table>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="690"><textarea class="inputRedUC" name="txtEspecial" id="txtEspecial" cols="106" rows="10"></textarea></td>
-  </tr>
-</table>
-<br>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td class="subttl">&nbsp;INFORME SUAS ÁREAS DE ATUAÇÃO</td>
-  </tr>
-</table>
-<table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-	  <td ><input type="checkbox" name="chkCondominios" id="chkCondominios"><label class="rotulo">CONDOMÍNIOS / GRUPOS</label></input></td>
-  </tr>
-<tr>
-    <td><input type="checkbox" name="chkAcademias" id="chkAcademias"><label class="rotulo">ACADEMIAS / CENTROS ESPORTIVOS</label></input></td>
-  </tr>
-<tr>
-    <td><input type="checkbox" name="chkResidencias" id="chkResidencias"><label class="rotulo">RESIDÊNCIAS / PARTICULAR</label></input></td>
-  </tr>
-<tr>
-    <td><input type="checkbox" name="chkEmpresas" id="chkEmpresas"><label class="rotulo">EMPRESAS / INSTITUIÇÕES</label></input></td>
-  </tr>
-<tr>
-    <td><input type="checkbox" name="chkEscolas" id="chkEscolas"><label class="rotulo">ESCOLAS / COLÉGIOS / UNIVERSIDADES</label></input></td>
-  </tr>
-	<tr>
-    <td><input type="checkbox" name="chkHospitais" id="chkHospitais"><label class="rotulo">HOSPITAIS / CLÍNICAS MÉDICAS</label></input></td>
-  </tr>
-<tr>
-    <td><input type="checkbox" name="chkParques" id="chkParques"><label class="rotulo">PARQUES / AR LIVRE / LOCAIS PÚBLICOS</label></td>
-  </tr>
-</table>
-<%ELSE%>
 <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
   	<tr>
 		<td width="100"><p class="rotulo">Possui CREF?</p></td>
@@ -283,10 +225,8 @@ IF rsCadastro.RecordCount = 0 THEN
 	<%END IF%>
   </tr>
 </table>
-<%END IF%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
-<div align="center"><input name="cmdEnviar" type="submit" id="cmdEnviar" value="Atualizar Cadastro">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="cmdLimpar" type="reset" id="cmdLimpar" value="Limpar Cadastro">
-</div>
+<div align="center"><input name="cmdEnviar" type="submit" id="cmdEnviar" value="Atualizar Cadastro"></div>
 </form>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>

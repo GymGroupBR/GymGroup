@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 
 <!doctype html>
 
@@ -10,14 +10,15 @@
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Cadastro</title>
+	<title>GYM GROUP :: Cadastro</title>
 </head>
 
 <body>
 <table width="800" align="center">
-	<tr>
-		<td width="250"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
-	  <td align="center"><h1>CADASTRO</h1></td>
+  <tr>
+	  <td width="230"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
+	  <td width="520" align="CENTER"><h1>CADASTRO</h1></td>
+	  <td width="50" align="right"><a href="../index.asp">SAIR</a></td>
   </tr>
 </table>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>

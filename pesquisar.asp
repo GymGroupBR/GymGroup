@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim adoCnn
 Dim rsCadastro
@@ -12,8 +12,8 @@ Uf = Request.Form("cboUf")
 
 Set adoCnn = Server.CreateObject("ADODB.Connection")
 Set rsCadastro = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"--'
 adoCnn.Open(sCnn)
 
 sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"
@@ -56,14 +56,13 @@ rsCadastro.Open sSQL, adoCnn, 1, 1
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Pesquisar</title>
+	<title>GYM GROUP :: Pesquisar</title>
 </head>
 	
 <body leftmargin="5" topmargin="5">
 <table width="800" align="center">
   <tr>
-		<td width="560"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
-	  <td width="120" align="right"><a href="cadastroIndividual.asp?sEmail=<%=Email%>">MEU CADASTRO</a></td>
+		<td width="680"><img src="../imgs/logo.png" width="118" height="90" alt=""/></td>
 	  <td width="70" align="right"><a href="javascript:history.back()">VOLTAR</a></td>
 	  <td width="50" align="right"><a href="../index.asp">SAIR</a></td>
   </tr>

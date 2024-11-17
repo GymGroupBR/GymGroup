@@ -1,24 +1,22 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim sCnn
 Dim adoCnn
 Dim sSQL
-Dim sSQLII
 Dim rsCadastro
-Dim rsIndividual
 Dim Email
-Dim sCdstr
+Dim iCdstr
 Dim Nome, Deficiencia, Nascimento, Celular, Endereco, No, Complemento, Bairro, Estado, Cidade, Cep
 Dim Altura, Peso
 Dim Sobre
 
 Email = Request.QueryString("sEmail")
+iCdstr = Request.QueryString("iCdstr")
 
 SET adoCnn = Server.CreateObject("ADODB.Connection")
 SET rsCadastro = Server.CreateObject("ADODB.RecordSet")
-SET rsIndividual  = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"--'
 adoCnn.Open(sCnn)
 
 Nome = Ucase(Request.Form("txtNome"))
@@ -39,64 +37,42 @@ Cep = Request.Form("txtCep")
 
 Altura = Cdbl(Request.Form("txtAltura"))
 Peso = Cdbl(Request.Form("txtPeso"))
-
 Sobre = Ucase(Request.Form("txtSobre")) 
-   
-sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"
-rsCadastro.Open sSQL, adoCnn, 1, 3
-rsCadastro("cadastroNome") = Nome
-rsCadastro("cadastroNascimento") = Nascimento
-rsCadastro("cadastroDeficiencia") = Deficiencia
-rsCadastro("cadastroCelular") = Celular
-rsCadastro("cadastroEndereco") = Endereco
-rsCadastro("cadastroNo") = No
-rsCadastro("cadastroComplemento") = Complemento
-rsCadastro("cadastroBairro") = Bairro
-rsCadastro("cadastroUf") = Uf
-rsCadastro("cadastroCidade") = Cidade
-rsCadastro("cadastroCep") = Cep
-rsCadastro.Update
-rsCadastro.Close
-SET rsCadastro = NOTHING
 
-sSQLII = "SELECT * FROM Individual WHERE individualEmail='" & Email & "'"
-rsIndividual.Open sSQLII, adoCnn, 1, 1
-IF rsIndividual.RecordCount = 0 THEN
-   sCdstr = 0
-   rsIndividual.Close
-ELSE
-   sCdstr = 1
-   rsIndividual.Close
-END IF
-
-IF sCdstr = 0 THEN
-	sSQLII = "SELECT * FROM Individual"
-   	rsIndividual.Open sSQLII, adoCnn, 1, 3
-   	rsIndividual.AddNew
-    rsIndividual("individualEmail") = Email
-   	rsIndividual("individualAltura") = Altura
-   	rsIndividual("individualPeso") = Peso
-   	IF Sobre = EMPTY THEN
-   		rsIndividual("individualSobre") = "-"
-   	ELSE
-   		rsIndividual("individualSobre") = Sobre
-   	END IF
-   	rsIndividual.Update
-   	rsIndividual.Close
-   	SET rsIndividual = NOTHING
-ELSE
-	sSQLII = "SELECT * FROM Individual WHERE individualEmail='" & Email & "'"
-	rsIndividual.Open sSQLII, adoCnn, 1, 3
-	rsIndividual("individualAltura") = Altura
-   	rsIndividual("individualPeso") = Peso
-   	IF Sobre = EMPTY THEN
-   		rsIndividual("individualSobre") = "-"
-   	ELSE
-   		rsIndividual("individualSobre") = Sobre
-   	END IF
-   	rsIndividual.Update
-   	rsIndividual.Close
-   	SET rsIndividual = NOTHING
+IF iCdstr = 1 THEN 
+	sSQL = "SELECT * FROM Cadastro WHERE cadastroEmail='" & Email & "'"
+	rsCadastro.Open sSQL, adoCnn, 1, 3
+	rsCadastro("cadastroNome") = Nome
+	rsCadastro("cadastroNascimento") = Nascimento
+	rsCadastro("cadastroDeficiencia") = Deficiencia
+	rsCadastro("cadastroCelular") = Celular
+	rsCadastro("cadastroEndereco") = Endereco
+	rsCadastro("cadastroNo") = No
+	rsCadastro("cadastroComplemento") = Complemento
+	rsCadastro("cadastroBairro") = Bairro
+	rsCadastro("cadastroUf") = Uf
+	rsCadastro("cadastroCidade") = Cidade
+	rsCadastro("cadastroCep") = Cep
+	rsCadastro.Update
+	rsCadastro.Close
+   	SET rsCadastro = NOTHING
+   	adoCnn.Close
+	SET adoCnn = NOTHING
+ELSEIF sCdstr = 2 THEN
+	sSQL = "SELECT * FROM Individual WHERE individualEmail='" & Email & "'"
+	rsCaastro.Open sSQL, adoCnn, 1, 3
+	rsCadastro("individualAltura") = CDbl(Altura)
+	rsCadastro("individualPeso") = CDbl(Peso)
+	IF Sobre = EMPTY THEN
+   		rsCadastro("individualSobre") = "-"
+	ELSE
+   		rsCadastro("individualSobre") = Sobre
+	END IF
+	rsCadastro.Update
+	rsCadastro.Close
+   	SET rsCadastro = NOTHING
+   	adoCnn.Close
+	SET adoCnn = NOTHING
 END IF
 %>
 <!doctype html>
@@ -110,7 +86,7 @@ END IF
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Cadastro</title>
+	<title>GYM GROUP :: Cadastro :: Detalhes</title>
 </head>
 
 <body>
@@ -144,8 +120,6 @@ END IF
 <img src="../imgs/linha.png" width="800" height="15"><br>
 <font class="rotulo">Sobre Você</font><br>
 <font class="selo"><b><%Response.Write(Sobre)%></b></font></p>
-<%adoCnn.Close%>
-<%SET adoCnn = Nothing%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
 </body>

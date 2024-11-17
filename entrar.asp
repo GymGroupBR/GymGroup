@@ -1,16 +1,12 @@
-<%@LANGUAGE="VBSCRIPT"%>
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <%
 Dim adoCnn
-Dim adoEntrar
-Dim rsEntrar
 Dim rsCadastro
-Dim sCnn
-Dim sSQL
+Dim sCnn, sSQL
 Dim Email
 Dim Senha
 Dim Tipo
 Dim Nome
-Dim Cadastros
 Dim MSG
 Dim Regra
 
@@ -19,8 +15,8 @@ Senha = Request.Form("txtSenha")
    
 Set adoCnn = Server.CreateObject("ADODB.Connection")
 Set rsCadastro = Server.CreateObject("ADODB.RecordSet")
-'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")--'
-sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"
+sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../../db/dbGG.mdb")
+'--sCnn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & "D:\web\localuser\gymgroup\banco\dbGG.mdb"--'
 adoCnn.Open(sCnn)
 
 IF Email = EMPTY AND Senha = EMPTY THEN
@@ -62,7 +58,7 @@ END IF
 	<meta name="description" content="Seu Grupo Saudável">
 	<meta name="keywords" content="Grupo, Saúde, Exercício, Corrida, Musculação, Fitness, Ginástica, Caminhada, Crossfit, Físico, Academia">
 	<link rel="stylesheet" href="../css/gymgroup.css">
-	<title>GYM GROUP ::: Pesquisar</title>
+	<title>GYM GROUP :: Pesquisar</title>
 </head>
 
 <body>
@@ -166,5 +162,10 @@ END IF
 <%END IF%>
 <p align="center"><img src="../imgs/linha.png" width="800" height="15"></p>
 <div class="aviso" align="center">GYM GROUP <%Response.Write("2024" & "-" & Year(Now))%> © Todos os Direitos Reservados</div>
+<%
+SET rsCadastro = NOTHING
+adoCnn.Close
+SET adoCnn = NOTHING
+%>
 </body>
 </html>
